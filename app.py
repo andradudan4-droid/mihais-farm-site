@@ -322,6 +322,13 @@ BASE_STYLE = """
   .marquee .grp{display:inline-flex;align-items:center;font-weight:700;font-size:12.5px;color:var(--gold-lt);letter-spacing:.14em;text-transform:uppercase}
   .marquee .grp i{margin:0 22px;color:var(--gold-dk);font-style:normal}
   @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .drip-row{position:relative;height:0;overflow:visible;z-index:6;pointer-events:none}
+  .drip{position:absolute;top:0;width:10px;height:0}
+  .drip::before{content:"";position:absolute;top:0;left:0;width:10px;border-radius:0 0 5px 5px;background:linear-gradient(180deg,var(--gold-lt),var(--gold) 70%,var(--gold-dk));animation:dripStrand 3.6s ease-in infinite;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+  .drip::after{content:"";position:absolute;left:1px;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold-lt),var(--gold) 55%,var(--gold-dk));animation:dripFall 3.6s ease-in infinite;opacity:0;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+  @keyframes dripStrand{0%,8%{height:0}55%{height:32px}63%{height:37px}66%{height:4px}100%{height:0}}
+  @keyframes dripFall{0%,65%{top:0;opacity:0;transform:scale(.5)}66%{top:34px;opacity:1;transform:scale(1)}92%{top:92px;opacity:.85;transform:scale(.9)}100%{top:108px;opacity:0;transform:scale(.7)}}
+  @media(prefers-reduced-motion:reduce){.drip::before,.drip::after{animation:none;opacity:0}}
   .band{padding:80px 24px}
   .head{text-align:center;max-width:640px;margin:0 auto 44px}
   .head .eyebrow{color:var(--gold);font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
@@ -421,6 +428,12 @@ MARQUEE_GRP = ('<span class="grp">EU Certified Organic <i>&#10022;</i> Raw &amp;
                'QR-Verified Certification <i>&#10022;</i></span>')
 MARQUEE = '<div class="marquee"><div class="track">' + MARQUEE_GRP + MARQUEE_GRP + '</div></div>'
 
+DRIP_ROW = '<div class="drip-row">' + "".join(
+    f'<span class="drip" style="left:{left}%;animation-delay:{delay}s"></span>'
+    for left, delay in [(4, 0.2), (14, 2.4), (24, 1.1), (35, 3.0), (46, 0.6),
+                         (57, 1.9), (68, 2.7), (78, 0.9), (88, 1.5), (95, 3.3)]
+) + '</div>'
+
 SCRIPTS = """
 <script>
 (function(){
@@ -471,7 +484,7 @@ def home_body():
   </div>
   <div class="hero-img"><img src="/static/images/product/jar-field.jpg" alt="Jar of Mihai's Farm honey in a wildflower field"></div>
 </header>
-""" + MARQUEE + """
+""" + MARQUEE + DRIP_ROW + """
 
 <section class="band"><div class="wrap">
   <div class="head reveal"><div class="eyebrow">Featured</div><h2>""" + html.escape(p["name"]) + """</h2><p>""" + html.escape(p["tagline"]) + """</p></div>
