@@ -279,7 +279,8 @@ BASE_STYLE = """
 <style>
   :root{
     --cream:#faf5e9; --paper:#fffdf8; --ink:#2a2118; --mut:#6b6152;
-    --green:#1f3a24; --green-dk:#142718; --gold:#c9a227; --gold-lt:#e2c66b;
+    --green:#1f3a24; --green-dk:#0e1f13; --gold:#e3ac0d; --gold-lt:#ffe37a; --gold-dk:#a97e05;
+    --gold-glow:rgba(227,172,13,.55);
     --line:rgba(31,58,36,.14);
   }
   *{box-sizing:border-box} html{scroll-behavior:smooth}
@@ -300,27 +301,32 @@ BASE_STYLE = """
   .mobile-menu a{padding:15px 24px;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
   .btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;border:0;border-radius:4px;background:var(--green);color:#fdfaf0;text-decoration:none;font-weight:600;padding:13px 26px;font-size:14px;letter-spacing:.03em;cursor:pointer}
   .btn:hover{background:var(--green-dk)}
-  .btn.gold{position:relative;background:var(--gold);color:var(--green-dk);overflow:visible}.btn.gold:hover{background:var(--gold-lt)}
+  .btn.gold{position:relative;background:linear-gradient(135deg,var(--gold-lt),var(--gold) 50%,var(--gold-dk));color:#2a1c02;overflow:visible;box-shadow:0 6px 20px var(--gold-glow);text-shadow:0 1px 0 rgba(255,255,255,.25)}
+  .btn.gold:hover{box-shadow:0 8px 30px var(--gold-glow),0 0 0 2px var(--gold-lt)}
   .btn.gold::after{content:"";position:absolute;left:50%;bottom:-7px;width:9px;height:9px;background:var(--gold);border-radius:50% 50% 50% 0;transform:translateX(-50%) rotate(45deg) scale(0);transition:transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
   .btn.gold:hover::after{transform:translateX(-50%) translateY(4px) rotate(45deg) scale(1)}
   .btn.ghost{background:transparent;border:1px solid var(--green);color:var(--green)}
   .btn[disabled]{opacity:.5;cursor:not-allowed}
-  .hero{position:relative;padding:0;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;background:var(--green-dk);overflow:hidden;min-height:560px}
-  .honey-drip{margin-top:-2px;line-height:0;filter:drop-shadow(0 4px 5px rgba(31,20,5,.18))}
-  .honey-drip svg{width:100%;height:44px;display:block}
-  @media(max-width:860px){.honey-drip svg{height:26px}}
-  .hero-copy{padding:70px 56px;display:flex;flex-direction:column;justify-content:center;color:#fdfaf0}
-  .hero-copy .eyebrow{color:var(--gold-lt);font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600}
+  .hero{position:relative;padding:0;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;background:radial-gradient(1200px 600px at 15% 20%,#1c3a22,var(--green-dk) 60%);overflow:hidden;min-height:560px}
+  .hero-copy{padding:70px 56px;display:flex;flex-direction:column;justify-content:center;color:#fdfaf0;position:relative;z-index:2}
+  .hero-copy .eyebrow{color:var(--gold-lt);font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;text-shadow:0 0 16px var(--gold-glow)}
   .hero-copy h1{font-size:clamp(34px,4.6vw,54px);line-height:1.08;margin:16px 0 18px;color:#fff}
+  .hero-copy h1 .g{background:linear-gradient(120deg,var(--gold-lt),var(--gold) 60%,var(--gold-dk));-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero-copy p{font-size:17px;color:#e7e2d2;max-width:460px;margin:0 0 28px}
   .hero-img{position:relative}
-  .hero-img img{width:100%;height:100%;object-fit:cover;min-height:340px}
-  .badge-strip{background:var(--paper);border-bottom:1px solid var(--line);padding:16px 24px}
-  .badge-row{display:flex;justify-content:center;gap:34px;flex-wrap:wrap}
-  .badge-row span{font-size:13px;font-weight:600;color:var(--green-dk);display:flex;align-items:center;gap:7px}
+  .hero-img::before{content:"";position:absolute;inset:-60px;background:radial-gradient(circle at 48% 42%,var(--gold-glow),transparent 62%);z-index:0;pointer-events:none;opacity:.8}
+  .hero-img img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;min-height:340px}
+  .marquee{background:var(--green-dk);border-top:1px solid var(--gold-dk);border-bottom:1px solid var(--gold-dk);overflow:hidden}
+  .marquee .track{display:inline-flex;white-space:nowrap;animation:mq 30s linear infinite;padding:15px 0}
+  .marquee:hover .track{animation-play-state:paused}
+  .marquee .grp{display:inline-flex;align-items:center;font-weight:700;font-size:12.5px;color:var(--gold-lt);letter-spacing:.14em;text-transform:uppercase}
+  .marquee .grp i{margin:0 22px;color:var(--gold-dk);font-style:normal}
+  @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .band{padding:80px 24px}
   .head{text-align:center;max-width:640px;margin:0 auto 44px}
   .head .eyebrow{color:var(--gold);font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
+  .head .eyebrow::after{content:"";display:block;width:64px;height:2px;margin:14px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}.reveal.in{opacity:1;transform:none}
   .head h2{font-size:clamp(28px,3.6vw,40px);margin:12px 0}
   .head p{color:var(--mut);font-size:15.5px}
   .story-band{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -330,8 +336,10 @@ BASE_STYLE = """
   .video-grid video{width:100%;border-radius:8px;background:#000;aspect-ratio:9/16;max-height:520px;object-fit:cover}
   .story-grid .copy p{color:#4a4234;font-size:15.5px;margin:0 0 16px}
   .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
-  .pcard{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden;text-decoration:none;color:var(--ink);display:block;transition:transform .25s,box-shadow .25s}
-  .pcard:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(31,58,36,.12)}
+  .pcard{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden;text-decoration:none;color:var(--ink);display:block;transition:transform .25s,box-shadow .25s}
+  .pcard:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(31,58,36,.16),0 0 0 1px var(--gold)}
+  .pcard::before{content:"";position:absolute;top:0;left:-60%;width:35%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);z-index:2;transition:left .8s ease;pointer-events:none}
+  .pcard:hover::before{left:135%}
   .pcard img{aspect-ratio:4/5;object-fit:cover;width:100%}
   .pcard .body{padding:20px}
   .pcard h3{margin:0 0 6px;font-size:18px}
@@ -352,7 +360,7 @@ BASE_STYLE = """
   .pill{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:600;cursor:pointer}
   .pill.active{background:var(--green);border-color:var(--green);color:#fff}
   .variety-blurb{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px 18px;font-size:14px;color:#4a4234;margin-bottom:22px}
-  .price-line{font-size:26px;font-weight:700;color:var(--green);margin:6px 0 22px;font-family:'Playfair Display',serif}
+  .price-line{font-size:26px;font-weight:700;color:var(--green);margin:6px 0 22px;font-family:'Playfair Display',serif;text-shadow:0 0 20px var(--gold-glow)}
   .qty-row{display:flex;align-items:center;gap:14px;margin-bottom:22px}
   .qty-box{display:flex;align-items:center;border:1px solid var(--line);border-radius:4px}
   .qty-box button{border:0;background:none;width:38px;height:40px;font-size:16px;cursor:pointer}
@@ -408,11 +416,20 @@ def nav():
 </div>
 """
 
-HONEY_DRIP = """
-<div class="honey-drip"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-<defs><linearGradient id="dripGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2c66b"/><stop offset=".55" stop-color="#c9a227"/><stop offset="1" stop-color="#96731a"/></linearGradient></defs>
-<path fill="url(#dripGrad)" d="M0,0 C30,0 30,55 60,55 C90,55 90,0 120,0 C150,0 150,20 180,20 C210,20 210,0 240,0 C270,0 270,45 300,45 C330,45 330,0 360,0 C390,0 390,15 420,15 C450,15 450,0 480,0 C510,0 510,60 540,60 C570,60 570,0 600,0 C630,0 630,25 660,25 C690,25 690,0 720,0 C750,0 750,40 780,40 C810,40 810,0 840,0 C870,0 870,10 900,10 C930,10 930,0 960,0 C990,0 990,50 1020,50 C1050,50 1050,0 1080,0 C1110,0 1110,30 1140,30 C1170,30 1170,0 1200,0 C1230,0 1230,45 1260,45 C1290,45 1290,0 1320,0 C1350,0 1350,20 1380,20 C1410,20 1410,0 1440,0 Z"/>
-</svg></div>
+MARQUEE_GRP = ('<span class="grp">EU Certified Organic <i>&#10022;</i> Raw &amp; Unfiltered <i>&#10022;</i> '
+               'Small Family Business <i>&#10022;</i> From the Carpathian Fields <i>&#10022;</i> '
+               'QR-Verified Certification <i>&#10022;</i></span>')
+MARQUEE = '<div class="marquee"><div class="track">' + MARQUEE_GRP + MARQUEE_GRP + '</div></div>'
+
+SCRIPTS = """
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
 """
 
 
@@ -432,7 +449,7 @@ def page(title, body, description="Organic, raw honey from the Carpathian fields
         '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>' + html.escape(title) + """ — Mihai's Farm</title>
 <meta name="description" content=\"""" + html.escape(description) + """\">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-""" + BASE_STYLE + """</head><body>""" + nav() + body + FOOTER + "</body></html>"
+""" + BASE_STYLE + """</head><body>""" + nav() + body + FOOTER + SCRIPTS + "</body></html>"
     )
 
 
@@ -441,17 +458,11 @@ def page(title, body, description="Organic, raw honey from the Carpathian fields
 def home_body():
     p = PRODUCTS[0]
     cheapest = min(v["price"] for v in p["variants"])
-    bullets_html = "".join(
-        f'<span>{emoji} {html.escape(text)}</span>' for emoji, text in [
-            ("🌱", "EU Certified Organic"), ("🍯", "Raw & Unfiltered"),
-            ("📱", "QR-Verified"), ("👨‍🌾", "Small Family Business"),
-        ]
-    )
     return """
 <header class="hero">
   <div class="hero-copy">
     <div class="eyebrow">Inspired by Mihai &middot; From the Carpathian Fields</div>
-    <h1>Raw, organic honey&nbsp;— the honest way.</h1>
+    <h1>Raw, organic honey<br>the <span class="g">honest</span> way.</h1>
     <p>Unfiltered, unheated and EU-certified organic, straight from the Carpathian fields. No shortcuts, no additives — just honey the way it should be.</p>
     <div style="display:flex;gap:14px;flex-wrap:wrap">
       <a class="btn gold" href="/shop">Shop the Honey</a>
@@ -460,12 +471,11 @@ def home_body():
   </div>
   <div class="hero-img"><img src="/static/images/product/jar-field.jpg" alt="Jar of Mihai's Farm honey in a wildflower field"></div>
 </header>
-""" + HONEY_DRIP + """
-<div class="badge-strip"><div class="badge-row">""" + bullets_html + """</div></div>
+""" + MARQUEE + """
 
 <section class="band"><div class="wrap">
-  <div class="head"><div class="eyebrow">Featured</div><h2>""" + html.escape(p["name"]) + """</h2><p>""" + html.escape(p["tagline"]) + """</p></div>
-  <div class="products" style="max-width:380px;margin:0 auto">
+  <div class="head reveal"><div class="eyebrow">Featured</div><h2>""" + html.escape(p["name"]) + """</h2><p>""" + html.escape(p["tagline"]) + """</p></div>
+  <div class="products reveal" style="max-width:380px;margin:0 auto">
     <a class="pcard" href="/product/""" + p["slug"] + """">
       <img src="/static/images/""" + p["images"][0] + """" alt=\"""" + html.escape(p["name"]) + """\">
       <div class="body"><h3>""" + html.escape(p["name"]) + """</h3><p class="tagline">Acacia &amp; Rapeseed &middot; 350g / 900g</p><p class="price">From """ + gbp(cheapest) + """</p></div>
@@ -473,10 +483,10 @@ def home_body():
   </div>
 </div></section>
 
-<section class="band story-band"><div class="wrap story-grid">
+<section class="band story-band"><div class="wrap story-grid reveal">
   <img src="/static/images/product/bees-on-comb.jpg" alt="Bees at work on the honeycomb">
   <div class="copy">
-    <div class="eyebrow" style="color:var(--gold)">Our Story</div>
+    <div class="eyebrow" style="color:var(--gold);text-align:left">Our Story</div>
     <h2 class="serif" style="font-size:30px;margin:10px 0 16px">A small family business, inspired by Mihai.</h2>
     <p>The name Mihai&rsquo;s Farm was chosen in honour of Mihai, whose values of hard work, simplicity and appreciation for honest food continue to inspire everything we do.</p>
     <p>We believe great products don&rsquo;t need complicated ingredients or shortcuts — only care, patience and respect for the natural world.</p>
@@ -499,8 +509,8 @@ def shop_body():
         )
     return """
 <section class="band"><div class="wrap">
-  <div class="head"><div class="eyebrow">Shop</div><h2>Our honey</h2><p>More farm products are on the way — this is just the beginning.</p></div>
-  <div class="products">""" + cards + """</div>
+  <div class="head reveal"><div class="eyebrow">Shop</div><h2>Our honey</h2><p>More farm products are on the way — this is just the beginning.</p></div>
+  <div class="products reveal">""" + cards + """</div>
 </div></section>
 """
 
@@ -675,7 +685,7 @@ def cart_body(error=None):
 def our_story_body():
     return """
 <section class="band"><div class="wrap narrow prose">
-  <div class="head"><div class="eyebrow">Our Story</div><h2>Inspired by tradition, nature and the simple beauty of honest food.</h2></div>
+  <div class="head reveal"><div class="eyebrow">Our Story</div><h2>Inspired by tradition, nature and the simple beauty of honest food.</h2></div>
   <img src="/static/images/banner.jpg" alt="Mihai's Farm" style="border-radius:8px;margin-bottom:32px">
   <p>Welcome to Mihai&rsquo;s Farm.</p>
   <p>Our journey began with a simple idea: to share genuine products made with respect for nature, tradition and quality.</p>
@@ -684,14 +694,14 @@ def our_story_body():
   <p>Today, our focus is premium organic honey, carefully produced and selected to preserve its natural flavour, character and quality. Every jar reflects our commitment to authenticity and transparency, including independently verifiable organic certification.</p>
   <p>As our journey continues, we hope to expand our range with other carefully selected farm products that share the same values of quality, tradition and respect for nature.</p>
   <p>Thank you for supporting a small family business and for becoming part of our story.</p>
-  <div class="certbar">
+  <div class="certbar reveal">
     <span>🌱 EU Certified Organic</span><span>🍯 Raw &amp; Unfiltered</span><span>📱 QR-Verified</span>
   </div>
 </div></section>
 
 <section class="band story-band"><div class="wrap">
-  <div class="head"><div class="eyebrow">Straight From the Hives</div><h2>See it for yourself</h2><p>A closer look at the honey, straight from harvest.</p></div>
-  <div class="video-grid">
+  <div class="head reveal"><div class="eyebrow">Straight From the Hives</div><h2>See it for yourself</h2><p>A closer look at the honey, straight from harvest.</p></div>
+  <div class="video-grid reveal">
     <video controls preload="metadata" playsinline src="/static/videos/harvest-1.mp4"></video>
     <video controls preload="metadata" playsinline src="/static/videos/harvest-2.mp4"></video>
   </div>
@@ -702,7 +712,7 @@ def our_story_body():
 def delivery_returns_body():
     return """
 <section class="band"><div class="wrap narrow prose">
-  <div class="head"><div class="eyebrow">Delivery &amp; Returns</div><h2>Straightforward, honestly written.</h2></div>
+  <div class="head reveal"><div class="eyebrow">Delivery &amp; Returns</div><h2>Straightforward, honestly written.</h2></div>
   <h3>Delivery</h3>
   <p>We currently deliver within the United Kingdom. Postage is a flat """ + gbp(SHIPPING_PENCE) + """ per order, and orders are usually with you within a week of dispatch.</p>
   <h3>Returns</h3>
@@ -729,7 +739,7 @@ def contact_body(sent=False, error=None):
     """ + error_html
     return """
 <section class="band"><div class="wrap narrow">
-  <div class="head"><div class="eyebrow">Contact</div><h2>Get in touch</h2><p>Questions about an order, or about the honey itself — we're happy to help.</p></div>
+  <div class="head reveal"><div class="eyebrow">Contact</div><h2>Get in touch</h2><p>Questions about an order, or about the honey itself — we're happy to help.</p></div>
   """ + inner + """
 </div></section>
 """
