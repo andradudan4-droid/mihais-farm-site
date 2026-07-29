@@ -321,6 +321,8 @@ BASE_STYLE = """
   .story-band{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .story-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center}
   .story-grid img{border-radius:6px}
+  .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+  .video-grid video{width:100%;border-radius:8px;background:#000;aspect-ratio:9/16;max-height:520px;object-fit:cover}
   .story-grid .copy p{color:#4a4234;font-size:15.5px;margin:0 0 16px}
   .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
   .pcard{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden;text-decoration:none;color:var(--ink);display:block;transition:transform .25s,box-shadow .25s}
@@ -671,6 +673,14 @@ def our_story_body():
   <p>Thank you for supporting a small family business and for becoming part of our story.</p>
   <div class="certbar">
     <span>🌱 EU Certified Organic</span><span>🍯 Raw &amp; Unfiltered</span><span>📱 QR-Verified</span>
+  </div>
+</div></section>
+
+<section class="band story-band"><div class="wrap">
+  <div class="head"><div class="eyebrow">Straight From the Hives</div><h2>See it for yourself</h2><p>A closer look at the honey, straight from harvest.</p></div>
+  <div class="video-grid">
+    <video controls preload="metadata" playsinline src="/static/videos/harvest-1.mp4"></video>
+    <video controls preload="metadata" playsinline src="/static/videos/harvest-2.mp4"></video>
   </div>
 </div></section>
 """
