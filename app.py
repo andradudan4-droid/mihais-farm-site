@@ -328,7 +328,7 @@ BASE_STYLE = """
   .drip::after{content:"";position:absolute;left:1px;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold-lt),var(--gold) 55%,var(--gold-dk));animation:dripFall 3.6s ease-in infinite;opacity:0;box-shadow:0 2px 3px rgba(0,0,0,.15)}
   @keyframes dripStrand{0%,8%{height:0}55%{height:52px}63%{height:60px}66%{height:6px}100%{height:0}}
   @keyframes dripFall{0%,65%{top:0;opacity:0;transform:scale(.5)}66%{top:56px;opacity:1;transform:scale(1)}92%{top:150px;opacity:.85;transform:scale(.95)}100%{top:175px;opacity:0;transform:scale(.75)}}
-  @media(prefers-reduced-motion:reduce){.drip::before,.drip::after{animation:none;opacity:0}}
+  @media(prefers-reduced-motion:reduce){.drip::before{animation:none;height:22px}.drip::after{animation:none;opacity:0}}
   .band{padding:80px 24px}
   .head{text-align:center;max-width:640px;margin:0 auto 44px}
   .head .eyebrow{color:var(--gold);font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
