@@ -288,7 +288,18 @@ BASE_STYLE = """
   h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif}
   a{color:var(--green)} img,video{max-width:100%;display:block}
   .wrap{max-width:1140px;margin:0 auto;width:100%}.narrow{max-width:760px}
-  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 24px;background:rgba(250,245,233,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 24px;background:rgba(250,245,233,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);overflow:hidden}
+  nav::before{content:"";position:absolute;inset:0;opacity:.07;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(30deg,var(--gold) 12%,transparent 12.5%,transparent 87%,var(--gold) 87.5%,var(--gold)),
+      linear-gradient(150deg,var(--gold) 12%,transparent 12.5%,transparent 87%,var(--gold) 87.5%,var(--gold)),
+      linear-gradient(30deg,var(--gold) 12%,transparent 12.5%,transparent 87%,var(--gold) 87.5%,var(--gold)),
+      linear-gradient(150deg,var(--gold) 12%,transparent 12.5%,transparent 87%,var(--gold) 87.5%,var(--gold)),
+      linear-gradient(60deg,var(--gold-dk) 25%,transparent 25.5%,transparent 75%,var(--gold-dk) 75%,var(--gold-dk)),
+      linear-gradient(60deg,var(--gold-dk) 25%,transparent 25.5%,transparent 75%,var(--gold-dk) 75%,var(--gold-dk));
+    background-size:36px 63px;
+    background-position:0 0,0 0,18px 31.5px,18px 31.5px,0 0,18px 31.5px}
+  nav .brand,nav .nav-actions{position:relative;z-index:1}
   .brand{display:flex;align-items:center;gap:11px;color:var(--green-dk);text-decoration:none;font-weight:700;letter-spacing:.06em;font-size:17px}
   .brand img{width:42px;height:42px;border-radius:50%;border:1px solid var(--gold)}
   .nav-actions{display:flex;align-items:center;gap:22px}
@@ -316,15 +327,25 @@ BASE_STYLE = """
   .hero-img{position:relative}
   .hero-img::before{content:"";position:absolute;inset:-60px;background:radial-gradient(circle at 48% 42%,var(--gold-glow),transparent 62%);z-index:0;pointer-events:none;opacity:.8}
   .hero-img img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;min-height:340px}
-  .marquee{background:var(--green-dk);border-top:1px solid var(--gold-dk);border-bottom:1px solid var(--gold-dk);overflow:hidden}
-  .marquee .track{display:inline-flex;white-space:nowrap;animation:mq 30s linear infinite;padding:15px 0}
+  .marquee{position:relative;background:var(--green-dk);border-top:1px solid var(--gold-dk);border-bottom:1px solid var(--gold-dk);overflow:hidden}
+  .marquee::before{content:"";position:absolute;inset:0;opacity:.28;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(30deg,var(--gold) 12%,transparent 12.5%,transparent 87%,var(--gold) 87.5%,var(--gold)),
+      linear-gradient(150deg,var(--gold) 12%,transparent 12.5%,transparent 87%,var(--gold) 87.5%,var(--gold)),
+      linear-gradient(30deg,var(--gold) 12%,transparent 12.5%,transparent 87%,var(--gold) 87.5%,var(--gold)),
+      linear-gradient(150deg,var(--gold) 12%,transparent 12.5%,transparent 87%,var(--gold) 87.5%,var(--gold)),
+      linear-gradient(60deg,var(--gold-dk) 25%,transparent 25.5%,transparent 75%,var(--gold-dk) 75%,var(--gold-dk)),
+      linear-gradient(60deg,var(--gold-dk) 25%,transparent 25.5%,transparent 75%,var(--gold-dk) 75%,var(--gold-dk));
+    background-size:34px 60px;
+    background-position:0 0,0 0,17px 30px,17px 30px,0 0,17px 30px}
+  .marquee .track{position:relative;z-index:1;display:inline-flex;white-space:nowrap;animation:mq 30s linear infinite;padding:15px 0}
   .marquee:hover .track{animation-play-state:paused}
   .marquee .grp{display:inline-flex;align-items:center;font-weight:700;font-size:12.5px;color:var(--gold-lt);letter-spacing:.14em;text-transform:uppercase}
   .marquee .grp i{margin:0 22px;color:var(--gold-dk);font-style:normal}
   @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .drip-row{position:relative;height:0;overflow:visible;z-index:6;pointer-events:none}
   .drip{position:absolute;top:0;width:18px;height:0}
-  .drip::before{content:"";position:absolute;top:0;left:0;width:18px;border-radius:0 0 9px 9px;background:linear-gradient(180deg,var(--gold-lt),var(--gold) 70%,var(--gold-dk));animation:dripStrand 3.6s ease-in infinite;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+  .drip::before{content:"";position:absolute;top:0;left:0;width:18px;border-radius:0 0 9px 9px;background:linear-gradient(105deg,var(--gold-dk) 0%,var(--gold) 30%,var(--gold-lt) 46%,var(--gold) 62%,var(--gold-dk) 100%);animation:dripStrand 3.6s ease-in infinite;box-shadow:0 1px 3px rgba(0,0,0,.18),inset 2px 0 3px rgba(255,255,255,.35)}
   .drip::after{content:"";position:absolute;left:1px;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold-lt),var(--gold) 55%,var(--gold-dk));animation:dripFall 3.6s ease-in infinite;opacity:0;box-shadow:0 2px 3px rgba(0,0,0,.15)}
   @keyframes dripStrand{0%,8%{height:0}55%{height:52px}63%{height:60px}66%{height:6px}100%{height:0}}
   @keyframes dripFall{0%,65%{top:0;opacity:0;transform:scale(.5)}66%{top:56px;opacity:1;transform:scale(1)}92%{top:150px;opacity:.85;transform:scale(.95)}100%{top:175px;opacity:0;transform:scale(.75)}}
