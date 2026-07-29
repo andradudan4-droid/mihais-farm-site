@@ -300,10 +300,15 @@ BASE_STYLE = """
   .mobile-menu a{padding:15px 24px;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
   .btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;border:0;border-radius:4px;background:var(--green);color:#fdfaf0;text-decoration:none;font-weight:600;padding:13px 26px;font-size:14px;letter-spacing:.03em;cursor:pointer}
   .btn:hover{background:var(--green-dk)}
-  .btn.gold{background:var(--gold);color:var(--green-dk)}.btn.gold:hover{background:var(--gold-lt)}
+  .btn.gold{position:relative;background:var(--gold);color:var(--green-dk);overflow:visible}.btn.gold:hover{background:var(--gold-lt)}
+  .btn.gold::after{content:"";position:absolute;left:50%;bottom:-7px;width:9px;height:9px;background:var(--gold);border-radius:50% 50% 50% 0;transform:translateX(-50%) rotate(45deg) scale(0);transition:transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+  .btn.gold:hover::after{transform:translateX(-50%) translateY(4px) rotate(45deg) scale(1)}
   .btn.ghost{background:transparent;border:1px solid var(--green);color:var(--green)}
   .btn[disabled]{opacity:.5;cursor:not-allowed}
   .hero{position:relative;padding:0;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;background:var(--green-dk);overflow:hidden;min-height:560px}
+  .honey-drip{margin-top:-2px;line-height:0;filter:drop-shadow(0 4px 5px rgba(31,20,5,.18))}
+  .honey-drip svg{width:100%;height:44px;display:block}
+  @media(max-width:860px){.honey-drip svg{height:26px}}
   .hero-copy{padding:70px 56px;display:flex;flex-direction:column;justify-content:center;color:#fdfaf0}
   .hero-copy .eyebrow{color:var(--gold-lt);font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600}
   .hero-copy h1{font-size:clamp(34px,4.6vw,54px);line-height:1.08;margin:16px 0 18px;color:#fff}
@@ -403,6 +408,13 @@ def nav():
 </div>
 """
 
+HONEY_DRIP = """
+<div class="honey-drip"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+<defs><linearGradient id="dripGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2c66b"/><stop offset=".55" stop-color="#c9a227"/><stop offset="1" stop-color="#96731a"/></linearGradient></defs>
+<path fill="url(#dripGrad)" d="M0,0 C30,0 30,55 60,55 C90,55 90,0 120,0 C150,0 150,20 180,20 C210,20 210,0 240,0 C270,0 270,45 300,45 C330,45 330,0 360,0 C390,0 390,15 420,15 C450,15 450,0 480,0 C510,0 510,60 540,60 C570,60 570,0 600,0 C630,0 630,25 660,25 C690,25 690,0 720,0 C750,0 750,40 780,40 C810,40 810,0 840,0 C870,0 870,10 900,10 C930,10 930,0 960,0 C990,0 990,50 1020,50 C1050,50 1050,0 1080,0 C1110,0 1110,30 1140,30 C1170,30 1170,0 1200,0 C1230,0 1230,45 1260,45 C1290,45 1290,0 1320,0 C1350,0 1350,20 1380,20 C1410,20 1410,0 1440,0 Z"/>
+</svg></div>
+"""
+
 
 FOOTER = """
 <footer>
@@ -448,6 +460,7 @@ def home_body():
   </div>
   <div class="hero-img"><img src="/static/images/product/jar-field.jpg" alt="Jar of Mihai's Farm honey in a wildflower field"></div>
 </header>
+""" + HONEY_DRIP + """
 <div class="badge-strip"><div class="badge-row">""" + bullets_html + """</div></div>
 
 <section class="band"><div class="wrap">
