@@ -323,11 +323,11 @@ BASE_STYLE = """
   .marquee .grp i{margin:0 22px;color:var(--gold-dk);font-style:normal}
   @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .drip-row{position:relative;height:0;overflow:visible;z-index:6;pointer-events:none}
-  .drip{position:absolute;top:0;width:10px;height:0}
-  .drip::before{content:"";position:absolute;top:0;left:0;width:10px;border-radius:0 0 5px 5px;background:linear-gradient(180deg,var(--gold-lt),var(--gold) 70%,var(--gold-dk));animation:dripStrand 3.6s ease-in infinite;box-shadow:0 1px 2px rgba(0,0,0,.15)}
-  .drip::after{content:"";position:absolute;left:1px;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold-lt),var(--gold) 55%,var(--gold-dk));animation:dripFall 3.6s ease-in infinite;opacity:0;box-shadow:0 1px 2px rgba(0,0,0,.12)}
-  @keyframes dripStrand{0%,8%{height:0}55%{height:32px}63%{height:37px}66%{height:4px}100%{height:0}}
-  @keyframes dripFall{0%,65%{top:0;opacity:0;transform:scale(.5)}66%{top:34px;opacity:1;transform:scale(1)}92%{top:92px;opacity:.85;transform:scale(.9)}100%{top:108px;opacity:0;transform:scale(.7)}}
+  .drip{position:absolute;top:0;width:18px;height:0}
+  .drip::before{content:"";position:absolute;top:0;left:0;width:18px;border-radius:0 0 9px 9px;background:linear-gradient(180deg,var(--gold-lt),var(--gold) 70%,var(--gold-dk));animation:dripStrand 3.6s ease-in infinite;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+  .drip::after{content:"";position:absolute;left:1px;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold-lt),var(--gold) 55%,var(--gold-dk));animation:dripFall 3.6s ease-in infinite;opacity:0;box-shadow:0 2px 3px rgba(0,0,0,.15)}
+  @keyframes dripStrand{0%,8%{height:0}55%{height:52px}63%{height:60px}66%{height:6px}100%{height:0}}
+  @keyframes dripFall{0%,65%{top:0;opacity:0;transform:scale(.5)}66%{top:56px;opacity:1;transform:scale(1)}92%{top:150px;opacity:.85;transform:scale(.95)}100%{top:175px;opacity:0;transform:scale(.75)}}
   @media(prefers-reduced-motion:reduce){.drip::before,.drip::after{animation:none;opacity:0}}
   .band{padding:80px 24px}
   .head{text-align:center;max-width:640px;margin:0 auto 44px}
